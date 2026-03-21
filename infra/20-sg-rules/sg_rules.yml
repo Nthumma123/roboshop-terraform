@@ -1,12 +1,12 @@
 bastion:
 - name : bastion_internet 
   description : "bastion accepting ssh connections from internet"
-  port :22
+  port : 22
   source : internet
   destination: bastion
 mongodb:
 - name : mongodb_bastion
-  port :22
+  port : 22
   src: bastion 
   dest: mongodb 
 - name : mongodb_catalogue 
@@ -19,3 +19,4 @@ mongodb:
   port : 27017
   source : user 
   destination: mongodb 
+

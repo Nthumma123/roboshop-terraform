@@ -3,6 +3,7 @@ resource "aws_security_group_rule" "bastion_internet" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
+  #cicdr_blocks       = ["0.0.0.0/0"]
   cidr_blocks       = [local.my_ip]
   #ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
   security_group_id = local.bastion_sg_id
@@ -17,6 +18,16 @@ resource "aws_security_group_rule" "mongodb_bastion" {
   
   source_security_group_id = local.bastion_sg_id
   security_group_id = local.mongodb_sg_id
+}
+resource "aws_security_group_rule" "redis_bastion" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  #cidr_blocks       = [aws_vpc.example.cidr_block]
+  
+  source_security_group_id = local.bastion_sg_id
+  security_group_id = local.redis_sg_id
 }
 
 resource "aws_security_group_rule" "mongodb_catalogue" {
